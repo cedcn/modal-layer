@@ -1,7 +1,7 @@
 {
   "name": "modal-layer",
   "version": "1.0.0",
-  "description": "",
+  "description": "a simple jquery modal",
   "main": "dist/modal-layer.js",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --process --color",
@@ -11,7 +11,7 @@
   "dependencies": {
     "jquery": "^2.2.1"
   },
-  "author": "",
+  "author": "Cedcn",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",
