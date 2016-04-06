@@ -66,8 +66,7 @@ const ModalLayer = function(elem = '.js-modal', options) {
     if (_isOpen) return;
     _isOpen = true;
     $container.css('display', 'block');
-    $(document).on('wheel', lockScroll);
-    // $body.addClass('open-modal-layer');
+    $body.addClass('open-modal-layer');
     $(document).on('keydown', escCloseModal);
 
     const openAnima = setTimeout( () => {
@@ -80,9 +79,8 @@ const ModalLayer = function(elem = '.js-modal', options) {
     if (!_isOpen) return;
     _isOpen = false;
     $container.removeClass('modal-show');
-    // $body.removeClass('open-modal-layer');
+    $body.removeClass('open-modal-layer');
     $(document).off('keydown', escCloseModal);
-    $(document).off('wheel', lockScroll);
 
     const closeAnima = setTimeout( () => {
       $container.css('display', 'none');
@@ -99,10 +97,6 @@ const ModalLayer = function(elem = '.js-modal', options) {
 
   function escCloseModal (e) {
     if (e.which === 27) m.close();
-  }
-
-  function lockScroll(e) {
-    e.preventDefault();
   }
 }
 
