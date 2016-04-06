@@ -85,7 +85,8 @@ var ModalLayer = function ModalLayer() {
     if (_isOpen) return;
     _isOpen = true;
     $container.css('display', 'block');
-    $body.addClass('open-modal-layer');
+    (0, _jquery2.default)(document).on('wheel', lockScroll);
+    // $body.addClass('open-modal-layer');
     (0, _jquery2.default)(document).on('keydown', escCloseModal);
 
     var openAnima = setTimeout(function () {
@@ -98,8 +99,9 @@ var ModalLayer = function ModalLayer() {
     if (!_isOpen) return;
     _isOpen = false;
     $container.removeClass('modal-show');
-    $body.removeClass('open-modal-layer');
+    // $body.removeClass('open-modal-layer');
     (0, _jquery2.default)(document).off('keydown', escCloseModal);
+    (0, _jquery2.default)(document).off('wheel', lockScroll);
 
     var closeAnima = setTimeout(function () {
       $container.css('display', 'none');
@@ -120,6 +122,10 @@ var ModalLayer = function ModalLayer() {
 
   function escCloseModal(e) {
     if (e.which === 27) m.close();
+  }
+
+  function lockScroll(e) {
+    e.preventDefault();
   }
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "modal-layer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a simple jquery modal",
   "main": "dist/modal-layer.js",
   "scripts": {
