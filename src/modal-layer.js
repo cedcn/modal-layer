@@ -56,7 +56,7 @@ const ModalLayer = function(elem = '.js-modal', options) {
   $closeBtn.on('click', () => { m.close() });
 
   // methods
-  m.open = function () {
+  m.open = function (cb) {
     if (_isOpen) return;
     _isOpen = true;
     $container.css('display', 'block');
@@ -67,9 +67,11 @@ const ModalLayer = function(elem = '.js-modal', options) {
       $container.addClass('modal-show');
       clearTimeout(openAnima);
     }, 10);
+
+    if (typeof cb === 'function') cb();
   }
 
-  m.close = function () {
+  m.close = function (cb) {
     if (!_isOpen) return;
     _isOpen = false;
     $container.removeClass('modal-show');
@@ -80,10 +82,13 @@ const ModalLayer = function(elem = '.js-modal', options) {
       $container.css('display', 'none');
       clearTimeout(closeAnima);
     }, o.delay);
+
+    if (typeof cb === 'function') cb();
   }
 
-  m.toggle = function() {
+  m.toggle = function(cb) {
     if (_isOpen) { m.close() } else { m.open() }
+    if (typeof cb === 'function') cb();
   }
 
   function escCloseModal (e) {
