@@ -3,7 +3,9 @@ import $ from 'jquery';
 const defaults = {
   effect: 'fade',     // 'fade' | 'scale' | 'slide'
   maskcolor: 'rgba(0, 0, 0, 0.2)',
-  delay: '500'
+  delay: '500',
+  closeStartFun: new Function(),
+  closeEndFun: new Function()
 };
 
 const ModalLayer = function(elem = '.js-modal', options) {
@@ -55,8 +57,12 @@ const ModalLayer = function(elem = '.js-modal', options) {
   $elem.on('mousedown', (e) => { e.stopPropagation() });
   $closeBtn.on('click', () => { m.close() });
 
+  // var
+  m.closeStartFun = o.closeStartFun;
+  m.closeEndFun = o.closeEndFun;
+
   // methods
-  m.open = function (cb) {
+  m.open = function () {
     if (_isOpen) return;
     _isOpen = true;
     $container.css('display', 'block');
@@ -67,11 +73,9 @@ const ModalLayer = function(elem = '.js-modal', options) {
       $container.addClass('modal-show');
       clearTimeout(openAnima);
     }, 10);
-
-    if (typeof cb === 'function') cb();
   }
 
-  m.close = function (cb) {
+  m.close = function () {
     if (!_isOpen) return;
     _isOpen = false;
     $container.removeClass('modal-show');
@@ -81,14 +85,14 @@ const ModalLayer = function(elem = '.js-modal', options) {
     const closeAnima = setTimeout( () => {
       $container.css('display', 'none');
       clearTimeout(closeAnima);
+      if (typeof m.closeEndFun === 'function') m.closeEndFun();
     }, o.delay);
 
-    if (typeof cb === 'function') cb();
+    if (typeof m.closeStartFun === 'function') m.closeStartFun();
   }
 
   m.toggle = function(cb) {
     if (_isOpen) { m.close() } else { m.open() }
-    if (typeof cb === 'function') cb();
   }
 
   function escCloseModal (e) {

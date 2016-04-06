@@ -15,7 +15,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var defaults = {
   effect: 'fade', // 'fade' | 'scale' | 'slide'
   maskcolor: 'rgba(0, 0, 0, 0.2)',
-  delay: '500'
+  delay: '500',
+  closeStartFun: new Function(),
+  closeEndFun: new Function()
 };
 
 var ModalLayer = function ModalLayer() {
@@ -74,8 +76,12 @@ var ModalLayer = function ModalLayer() {
     m.close();
   });
 
+  // var
+  m.closeStartFun = o.closeStartFun;
+  m.closeEndFun = o.closeEndFun;
+
   // methods
-  m.open = function (cb) {
+  m.open = function () {
     if (_isOpen) return;
     _isOpen = true;
     $container.css('display', 'block');
@@ -86,11 +92,9 @@ var ModalLayer = function ModalLayer() {
       $container.addClass('modal-show');
       clearTimeout(openAnima);
     }, 10);
-
-    if (typeof cb === 'function') cb();
   };
 
-  m.close = function (cb) {
+  m.close = function () {
     if (!_isOpen) return;
     _isOpen = false;
     $container.removeClass('modal-show');
@@ -100,9 +104,10 @@ var ModalLayer = function ModalLayer() {
     var closeAnima = setTimeout(function () {
       $container.css('display', 'none');
       clearTimeout(closeAnima);
+      if (typeof m.closeEndFun === 'function') m.closeEndFun();
     }, o.delay);
 
-    if (typeof cb === 'function') cb();
+    if (typeof m.closeStartFun === 'function') m.closeStartFun();
   };
 
   m.toggle = function (cb) {
@@ -111,7 +116,6 @@ var ModalLayer = function ModalLayer() {
     } else {
       m.open();
     }
-    if (typeof cb === 'function') cb();
   };
 
   function escCloseModal(e) {
