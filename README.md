@@ -15,9 +15,13 @@ const modal = new ModalLayer(selector [,options]);
 -----
 #### *options*
 -----
-- effect [ 'fade' | 'scale' | 'slide']
-- maskcolor
-- delay
+- effect ( *value: 'fade' | 'scale' | 'slide'* )
+- maskcolor ( *type: color* )
+- delay ( *type: number* )
+- openStartFun ( *type: function* )
+- openEndFun ( *type: function* )
+- closeStartFun ( *type: function* )
+- closeEndFun ( *type: function* )
 
 #### *methods*
 -----
