@@ -17,7 +17,9 @@ var defaults = {
   maskcolor: 'rgba(0, 0, 0, 0.2)',
   delay: '500',
   closeStartFun: new Function(),
-  closeEndFun: new Function()
+  closeEndFun: new Function(),
+  openStartFun: new Function(),
+  openEndFun: new Function()
 };
 
 var ModalLayer = function ModalLayer() {
@@ -79,6 +81,8 @@ var ModalLayer = function ModalLayer() {
   // var
   m.closeStartFun = o.closeStartFun;
   m.closeEndFun = o.closeEndFun;
+  m.openStartFun = o.openStartFun;
+  m.openEndFun = o.openEndFun;
 
   // methods
   m.open = function () {
@@ -92,6 +96,13 @@ var ModalLayer = function ModalLayer() {
       $container.addClass('modal-show');
       clearTimeout(openAnima);
     }, 10);
+
+    var openEnd = setTimeout(function () {
+      if (typeof m.openEndFun === 'function') m.openEndFun();
+      clearTimeout(openEnd);
+    }, o.delay);
+
+    if (typeof m.openStartFun === 'function') m.openStartFun();
   };
 
   m.close = function () {
