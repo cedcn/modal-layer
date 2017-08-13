@@ -29,17 +29,16 @@ const ModalLayer = function(elem = '.js-modal', options) {
       break;
   }
 
-  init();
+  // add wrap and close button
+  $elem.addClass('modal-layer-content');
+  $elem.wrap('<section class="modal-layer-container"></section>');
+  $elem.append('<div class="modal-layer-close"/>');
 
-  function init() {
-    // add wrap and close button
-    $elem.addClass('modal-layer-content');
-    $elem.wrap('<section class="modal-layer-container"></section>');
-    $elem.append('<div class="modal-layer-close"/>');
-  }
+  const $container = $elem.parent('.modal-layer-container');
+  $container.append('<div class="modal-layer-mask"/>')
 
-  const $container = $elem.parents('.modal-layer-container');
   const $closeBtn = $container.find('.modal-layer-close');
+  const $mask = $container.find('.modal-layer-mask');
 
   $container.css({
     'transition-duration': `${ o.delay / 1000 }s`,
@@ -51,12 +50,10 @@ const ModalLayer = function(elem = '.js-modal', options) {
   })
 
   $container.addClass(effectClass);
-  $container.on('mousedown', (e) => {
-    e.stopPropagation();
+  $mask.on('mousedown', (e) => {
     if (e.which === 1) m.close();
   });
 
-  $elem.on('mousedown', (e) => { e.stopPropagation() });
   $closeBtn.on('click', () => { m.close() });
 
   // var
