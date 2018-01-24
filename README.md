@@ -1,12 +1,14 @@
-#modal-layer
+# modal-layer
+
+depend jquery  >= 3.0.0
 - - -
-###Install
+### Install
 `npm install modal-layer --save`
 
-###Usage for webpack
+### Usage for webpack
 ```javascript
 import ModalLayer from 'modal-layer';
-require('modal-layer/dist/style.css');
+import('modal-layer/dist/style.css');
 
 const modal = new ModalLayer(selector [,options]);
 ```

@@ -1,6 +1,6 @@
 {
   "name": "modal-layer",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a simple jquery modal",
   "main": "dist/modal-layer.js",
   "scripts": {
@@ -8,9 +8,6 @@
     "babel": "babel src/modal-layer.js -o dist/modal-layer.js",
     "style": "webpack --config style.config.js",
     "build": "npm run babel && npm run style"
-  },
-  "dependencies": {
-    "jquery": "^2.2.1"
   },
   "author": "Cedcn",
   "license": "ISC",
@@ -26,7 +23,8 @@
     "babel-preset-es2015": "^6.6.0",
     "css-loader": "^0.19.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "node-sass": "^4.5.2",
+    "file-loader": "^0.11.2",
+    "node-sass": "^4.7.2",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.14",

@@ -1,3 +1,5 @@
+$hack: '';
+
 body.open-modal-layer {
   overflow-y: hidden;
   padding-right: 15px\0;
@@ -44,25 +46,28 @@ body.open-modal-layer {
   .modal-layer-close {
     position: absolute;
     right: 0;
+    right: -13px\0;
     top: 0;
-    width: 26px;
-    height: 26px;
+    top: -13px\0;
+    width: 30px;
+    height: 30px;
     background-color: #fff;
     cursor: pointer;
     transform: translate3d(40%, -40%, 0);
     border-radius: 50%;
     box-sizing: border-box;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.39);
+    transition: all 0.2s;
 
     &::before, &::after {
       position: absolute;
       top: 50%;
       left: 50%;
       content: '';
-      width: 70%;
-      height: 2px;
+      width: 65%;
+      height: 1px;
       background-color: #000;
-
+      transition: all 0.2s;
     }
 
     &::before {
@@ -73,6 +78,22 @@ body.open-modal-layer {
       transform: translate3d(-50%, -50%, 0) rotate(-45deg);
     }
 
+    &:hover {
+      background-color: #ff9373;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0);
+
+      &::before, &::after {
+        background-color: #fff;
+      }
+
+      &::before {
+        transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+      }
+
+      &::after {
+        transform: translate3d(-50%, -50%, 0) rotate(-135deg);
+      }
+    }
   }
 
   .modal-layer-content {
